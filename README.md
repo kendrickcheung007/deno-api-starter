@@ -7,8 +7,8 @@ deno 的 api 初始启动模板
 ## 技术栈
 
 - [zod](https://zod.dev)
-- [deno kv](https://deno.com/kv)
 - [hono](https://github.com/honojs/hono)
+- [deno kv](https://deno.com/kv)
 
 <br />
 
@@ -19,8 +19,13 @@ deno 的 api 初始启动模板
 - [x] 日志支持
 - [ ] 文件路由
 - [ ] 错误处理
+- [ ] 权限系统
+- [ ] 用户体系
+- [ ] 抽象存储层
+- [ ] oauth 体系
+- [ ] docker 支持
 - [ ] 规范的响应结构
-- [ ] 用户注册登录模块
+- [ ] websocket 支持
 
 <br />
 
