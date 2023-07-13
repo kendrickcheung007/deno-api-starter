@@ -1,1 +1,1 @@
-export const inDenoDeploy = Boolean(Deno.env.get("DENO_DEPLOYMENT_ID"))
+export const inDenoDeploy = Boolean(Deno.env.get("DENO_DEPLOYMENT_ID"));

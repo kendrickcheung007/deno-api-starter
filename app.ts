@@ -17,8 +17,8 @@ app.use(
     // 输出日志到控制台
     consoleDateLog(text, date);
     // 写入日志到本地 logs 目录 (deno deploy 等 edge 不支持)
-    if (!inDenoDeploy) {  
-        writeDateLog(text, date);
+    if (!inDenoDeploy) {
+      writeDateLog(text, date);
     }
   }),
 );
