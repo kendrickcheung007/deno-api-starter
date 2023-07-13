@@ -1,6 +1,6 @@
 # deno-api-starter
 
-deno 的 api 模板
+deno 的 api 初始启动模板
 
 <br />
 
