@@ -13,8 +13,10 @@ app.use(
   "*",
   logger((text) => {
     const date = new Date();
-    consoleDateLog(text, date)
-    writeDateLog(text, date)
+    // 输出日志到控制台
+    consoleDateLog(text, date);
+    // 写入日志到本地 logs 目录
+    writeDateLog(text, date);
   }),
 );
 
