@@ -1,4 +1,3 @@
-import { exists } from "https://deno.land/std@0.193.0/fs/exists.ts";
 import type { Context, Next } from "https://deno.land/x/hono@v3.3.0/mod.ts";
 import { getMimeType } from "https://deno.land/x/hono@v3.3.0/utils/mime.ts";
 import { getFilePath } from "https://deno.land/x/hono@v3.3.0/utils/filepath.ts";
@@ -8,6 +7,8 @@ export type ServeStaticOptions = {
   path?: string;
   rewriteRequestPath?: (path: string) => string;
 };
+
+const { open } = Deno
 
 const DEFAULT_DOCUMENT = "index.html";
 
@@ -32,13 +33,21 @@ export const serveStatic = (options: ServeStaticOptions = { root: "" }) => {
 
     path = `./${path}`;
 
-    if (await exists(path, { isFile: true })) {
+
+    let file
+
+    try {
+      file = await open(path)
+    } catch (e) {
+      console.warn(`${e}`)
+    }
+
+    if (file) {
       const mimeType = getMimeType(path);
       if (mimeType) {
         c.header("Content-Type", mimeType);
       }
       // 对文件进行流式处理
-      const file = await Deno.open(path);
       return c.body(file.readable);
     } else {
       console.warn(`Static file: ${path} is not found`);
