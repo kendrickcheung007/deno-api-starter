@@ -1,14 +1,11 @@
 import { Status } from "https://deno.land/std@0.194.0/http/http_status.ts";
-import {
-  cors,
-  logger,
-  serveStatic,
-} from "https://deno.land/x/hono@v3.3.0/middleware.ts";
+import { cors, logger } from "https://deno.land/x/hono@v3.3.0/middleware.ts";
 import { Hono } from "https://deno.land/x/hono@v3.3.0/mod.ts";
 import { consoleDateLog, writeDateLog } from "./utils/log.ts";
 import { useFailResponse } from "./utils/response.ts";
 import { inDenoDeploy } from "./utils/runtime.ts";
 import { routes } from "./routes.ts";
+import { serveStatic } from "./middlewares/static.ts";
 
 const app = new Hono();
 
