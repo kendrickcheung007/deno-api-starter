@@ -1,6 +1,7 @@
 {
   "tasks": {
     "start": "deno run --allow-env=DENO_DEPLOYMENT_ID --allow-net --allow-write --allow-read app.ts",
-    "dev": "deno run --allow-env=DENO_DEPLOYMENT_ID --allow-net --allow-read --allow-write --watch app.ts"
+    "dev": "deno run --allow-env=DENO_DEPLOYMENT_ID --allow-net --allow-read --allow-write --watch app.ts",
+    "prepare": "deno run --allow-read --allow-write --watch scripts/prepare.ts"
   }
 }

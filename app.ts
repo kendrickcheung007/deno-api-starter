@@ -8,6 +8,7 @@ import { Hono } from "https://deno.land/x/hono@v3.3.0/mod.ts";
 import { consoleDateLog, writeDateLog } from "./utils/log.ts";
 import { useFailResponse } from "./utils/response.ts";
 import { inDenoDeploy } from "./utils/runtime.ts";
+import { routes } from "./routes.ts";
 
 const app = new Hono();
 
@@ -48,5 +49,9 @@ app.use(
 
 // 静态服务
 app.use("/static/*", serveStatic({ root: "./" }));
+
+routes.forEach((route: (app: Hono) => void) => {
+  route(app);
+});
 
 Deno.serve(app.fetch);
