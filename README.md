@@ -35,6 +35,7 @@ deno 的 api 初始启动模板
   - [ ] 数据库层
 - [ ] oauth 体系
 - [ ] docker 支持
+- [ ] cli 服务支持
 - [ ] 规范的响应结构
 - [ ] websocket 支持
 
