@@ -10,7 +10,7 @@ export type ServeStaticOptions = {
   rewriteRequestPath?: (path: string) => string;
 };
 
-const { open } = Deno
+const { open } = Deno;
 
 const DEFAULT_DOCUMENT = "index.html";
 
@@ -36,19 +36,19 @@ export const serveStatic = (options: ServeStaticOptions = { root: "" }) => {
 
     path = `./${path}`;
 
-    let file
+    let file;
     try {
-      file = await open(path)
+      file = await open(path);
     } catch (e) {
-      console.warn(`${e}`)
+      console.warn(`${e}`);
       if (e instanceof Deno.errors.NotFound) {
         // 未找到文件错误
-        c.status(Status.NotFound)
+        c.status(Status.NotFound);
       } else {
         // 未知错误
-        c.status(Status.InternalServerError)
+        c.status(Status.InternalServerError);
       }
-      return useFailResponse(c)
+      return useFailResponse(c);
     }
 
     const mimeType = getMimeType(path);
@@ -57,5 +57,5 @@ export const serveStatic = (options: ServeStaticOptions = { root: "" }) => {
     }
     // 对文件进行流式处理
     return c.body(file.readable);
-  }
+  };
 };

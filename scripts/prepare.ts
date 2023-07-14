@@ -22,12 +22,12 @@ async function createRoutes(dir = "./api", output = "./routes.ts") {
       path: slash(entry.path),
     };
     modules.push(module);
-    imports.push(`import ${module.name} from "./${module.path}"`);
+    imports.push(`import ${module.name} from "./${module.path}";`);
   }
   const importsText = imports.join("\n");
 
   const routes = modules.map((m) => m.name);
-  const routesText = `export const routes = ${JSON.stringify(routes, null, 2)}`
+  const routesText = `export const routes = ${JSON.stringify(routes, null, 2)};`
     .replace(/(['"])(\$.*?)\1/g, "$2");
 
   const text = `${importsText}\n\n${routesText}`;
