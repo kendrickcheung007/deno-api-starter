@@ -15,6 +15,7 @@ const { open } = Deno
 const DEFAULT_DOCUMENT = "index.html";
 
 // 静态服务 (流式处理)
+// pr link: https://github.com/honojs/hono/pull/1234
 export const serveStatic = (options: ServeStaticOptions = { root: "" }) => {
   return async (c: Context, next: Next) => {
     // Do nothing if Response is already set
