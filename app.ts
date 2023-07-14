@@ -38,15 +38,15 @@ app.use(
   }),
 );
 
-// 静态服务
-app.use("/static/*", serveStatic({ root: "./" }));
-
 // 跨域
 app.use(
-  "/api/*",
+  "*",
   cors({
     origin: [], // 配置需要跨的域
   }),
 );
+
+// 静态服务
+app.use("/static/*", serveStatic({ root: "./" }));
 
 Deno.serve(app.fetch);
