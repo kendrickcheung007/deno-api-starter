@@ -1,6 +1,8 @@
 import type { Context, Next } from "https://deno.land/x/hono@v3.3.0/mod.ts";
 import { getMimeType } from "https://deno.land/x/hono@v3.3.0/utils/mime.ts";
 import { getFilePath } from "https://deno.land/x/hono@v3.3.0/utils/filepath.ts";
+import { Status } from "https://deno.land/std@0.194.0/http/http_status.ts";
+import { useFailResponse } from "../utils/response.ts";
 
 export type ServeStaticOptions = {
   root?: string;
@@ -33,26 +35,26 @@ export const serveStatic = (options: ServeStaticOptions = { root: "" }) => {
 
     path = `./${path}`;
 
-
     let file
-
     try {
       file = await open(path)
     } catch (e) {
       console.warn(`${e}`)
+      if (e instanceof Deno.errors.NotFound) {
+        // 未找到文件错误
+        c.status(Status.NotFound)
+      } else {
+        // 未知错误
+        c.status(Status.InternalServerError)
+      }
+      return useFailResponse(c)
     }
 
-    if (file) {
-      const mimeType = getMimeType(path);
-      if (mimeType) {
-        c.header("Content-Type", mimeType);
-      }
-      // 对文件进行流式处理
-      return c.body(file.readable);
-    } else {
-      console.warn(`Static file: ${path} is not found`);
-      await next();
+    const mimeType = getMimeType(path);
+    if (mimeType) {
+      c.header("Content-Type", mimeType);
     }
-    return;
-  };
+    // 对文件进行流式处理
+    return c.body(file.readable);
+  }
 };
