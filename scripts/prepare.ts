@@ -6,7 +6,7 @@ interface Module {
   path: string;
 }
 
-async function createRoutes(dir = "./api", output = "./routes.ts") {
+export async function createRoutes(dir = "./api", output = "./routes.ts") {
   let counter = 0;
   const imports: string[] = [];
   const modules: Module[] = [];
@@ -35,14 +35,17 @@ async function createRoutes(dir = "./api", output = "./routes.ts") {
   Deno.writeTextFile(output, text);
 }
 
-async function prepareRoutes() {
+export async function dev(app: string) {
   const dir = "api";
   const output = "routes.ts";
 
   // 刚开始需要创建路由表
-  createRoutes(dir, output);
+  await createRoutes(dir, output);
 
-  // 有新文件或删除文件时重新创建
+  // 加载 app
+  import(app)
+
+  // 有新文件或删除文件时重新创建路由表
   const watcher = Deno.watchFs(dir, {
     recursive: true,
   });
@@ -54,5 +57,3 @@ async function prepareRoutes() {
   }
 }
 
-// watch 生成路由
-await prepareRoutes();

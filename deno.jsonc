@@ -1,9 +1,7 @@
 {
   "tasks": {
-    "dev": "deno task run --watch app.ts",
-    "start": "deno task prepare && deno task run app.ts",
-    "run": "deno run --allow-env=DENO_DEPLOYMENT_ID --allow-net --allow-write=./logs --allow-read=./static",
-    "prepare:dev": "deno task prepare dev",
-    "prepare": "deno run --allow-read=./api --allow-write=./routes.ts --watch scripts/prepare.ts"
+    "start": "deno task run app.ts",
+    "dev": "deno task run --watch scripts/dev.ts",
+    "run": "deno run --allow-env=DENO_DEPLOYMENT_ID --allow-net --allow-write=./logs,./routes.ts --allow-read"
   }
 }
