@@ -43,7 +43,7 @@ export async function dev(app: string) {
   await createRoutes(dir, output);
 
   // 加载 app
-  import(app)
+  import(app);
 
   // 有新文件或删除文件时重新创建路由表
   const watcher = Deno.watchFs(dir, {
@@ -56,4 +56,3 @@ export async function dev(app: string) {
     }
   }
 }
-

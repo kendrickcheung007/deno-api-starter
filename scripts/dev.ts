@@ -1,4 +1,3 @@
-import { dev } from "./prepare.ts"
+import { dev } from "./prepare.ts";
 
-dev("../app.ts")
-
+dev("../app.ts");

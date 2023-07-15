@@ -1,5 +1,9 @@
 import { Status } from "https://deno.land/std@0.194.0/http/http_status.ts";
-import { cors, logger } from "https://deno.land/x/hono@v3.3.0/middleware.ts";
+import {
+  cors,
+  logger,
+  prettyJSON,
+} from "https://deno.land/x/hono@v3.3.0/middleware.ts";
 import { Hono } from "https://deno.land/x/hono@v3.3.0/mod.ts";
 import { consoleDateLog, writeDateLog } from "./utils/log.ts";
 import { useFailResponse } from "./utils/response.ts";
@@ -43,6 +47,9 @@ app.use(
     origin: [], // 配置需要跨的域
   }),
 );
+
+// 美化 json
+app.use("*", prettyJSON());
 
 // 静态服务
 app.use("/static/*", serveStatic({ root: "./" }));
