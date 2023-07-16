@@ -27,6 +27,7 @@ deno 的 api 初始启动模板
 - [x] 日志支持
 - [x] 错误处理
 - [x] 文件路由
+- [ ] [sse 支持](https://www.youtube.com/watch?v=6QnTNKOJk5A)
 - [ ] 权限系统
 - [ ] 用户体系
 - [ ] 抽象存储层
@@ -37,6 +38,7 @@ deno 的 api 初始启动模板
 - [ ] docker 支持
 - [x] 流式静态服务
 - [ ] cli 服务支持
+- [ ]
 - [x] 规范的响应结构
 - [ ] websocket 支持
 
