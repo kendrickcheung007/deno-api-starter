@@ -2,7 +2,10 @@ import {
   Status,
   STATUS_TEXT,
 } from "https://deno.land/std@0.194.0/http/http_status.ts";
-import type { Context } from "https://deno.land/x/hono@v3.3.0/mod.ts";
+import {
+  type Context,
+  HTTPException,
+} from "https://deno.land/x/hono@v3.3.0/mod.ts";
 
 // 规范成功请求
 export function useFailResponse(
@@ -27,4 +30,16 @@ export function useSuccessResponse<T = any>(
     msg: "success",
     data,
   }, status);
+}
+
+export function assert(
+  expr: unknown,
+  msg: string,
+  error_status = Status.BadRequest,
+): asserts expr {
+  if (!expr) {
+    throw new HTTPException(error_status, {
+      message: msg,
+    });
+  }
 }
