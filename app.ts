@@ -3,8 +3,8 @@ import {
   cors,
   logger,
   prettyJSON,
-} from "https://deno.land/x/hono@v3.3.0/middleware.ts";
-import { Hono } from "https://deno.land/x/hono@v3.3.0/mod.ts";
+} from "https://deno.land/x/hono@v3.3.1/middleware.ts";
+import { Hono } from "https://deno.land/x/hono@v3.3.1/mod.ts";
 import { consoleDateLog, writeDateLog } from "./utils/log.ts";
 import { useFailResponse } from "./utils/response.ts";
 import { inDenoDeploy } from "./utils/runtime.ts";

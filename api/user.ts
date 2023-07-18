@@ -1,4 +1,4 @@
-import { Hono } from "https://deno.land/x/hono@v3.3.0/mod.ts";
+import { Hono } from "https://deno.land/x/hono@v3.3.1/mod.ts";
 import { useSuccessResponse } from "../utils/response.ts";
 
 // TODO

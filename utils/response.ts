@@ -5,7 +5,7 @@ import {
 import {
   type Context,
   HTTPException,
-} from "https://deno.land/x/hono@v3.3.0/mod.ts";
+} from "https://deno.land/x/hono@v3.3.1/mod.ts";
 
 // 规范成功请求
 export function useFailResponse(
