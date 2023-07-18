@@ -24,7 +24,7 @@ export function useFailResponse(
 export function useSuccessResponse<T = any>(
   c: Context,
   data: T,
-  status = c.res.status,
+  status = Status.OK,
 ) {
   return c.json({
     msg: "success",
