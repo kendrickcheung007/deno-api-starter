@@ -1,5 +1,5 @@
-import { slash } from "https://deno.land/x/easy_std@v0.4.6/src/path.ts";
-import { walk } from "https://deno.land/std@0.194.0/fs/walk.ts";
+import { slash } from "https://deno.land/x/easy_std@v0.4.8/src/path.ts";
+import { walk } from "https://deno.land/std@0.198.0/fs/walk.ts";
 
 interface Module {
   name: string;

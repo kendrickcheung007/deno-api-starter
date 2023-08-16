@@ -1,10 +1,10 @@
-import { Status } from "https://deno.land/std@0.194.0/http/http_status.ts";
+import { Status } from "https://deno.land/std@0.198.0/http/http_status.ts";
 import {
   cors,
   logger,
   prettyJSON,
-} from "https://deno.land/x/hono@v3.3.1/middleware.ts";
-import { Hono } from "https://deno.land/x/hono@v3.3.1/mod.ts";
+} from "https://deno.land/x/hono@v3.4.3/middleware.ts";
+import { Hono } from "https://deno.land/x/hono@v3.4.3/mod.ts";
 import { consoleDateLog, writeDateLog } from "./utils/log.ts";
 import { useFailResponse } from "./utils/response.ts";
 import { inDenoDeploy } from "./utils/runtime.ts";
