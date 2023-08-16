@@ -1,5 +1,6 @@
-import { slash } from "https://deno.land/x/easy_std@v0.4.8/src/path.ts";
 import { walk } from "https://deno.land/std@0.198.0/fs/walk.ts";
+import { slash } from "https://deno.land/x/easy_std@v0.4.8/src/path.ts";
+import { debounce } from "https://deno.land/std@0.198.0/async/debounce.ts";
 
 interface Module {
   name: string;
@@ -35,6 +36,8 @@ export async function createRoutes(dir = "./api", output = "./routes.ts") {
   Deno.writeTextFile(output, text);
 }
 
+const debouncedCreateRoutes = debounce(createRoutes, 500);
+
 export async function dev(app: string) {
   const dir = "api";
   const output = "routes.ts";
@@ -52,7 +55,7 @@ export async function dev(app: string) {
 
   for await (const event of watcher) {
     if (event.kind === "create" || event.kind === "remove") {
-      createRoutes(dir, output);
+      debouncedCreateRoutes(dir, output);
     }
   }
 }
