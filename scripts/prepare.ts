@@ -1,6 +1,6 @@
-import { walk } from "https://deno.land/std@0.198.0/fs/walk.ts";
+import { walk } from "https://deno.land/std@0.199.0/fs/walk.ts";
 import { slash } from "https://deno.land/x/easy_std@v0.4.8/src/path.ts";
-import { debounce } from "https://deno.land/std@0.198.0/async/debounce.ts";
+import { debounce } from "https://deno.land/std@0.199.0/async/debounce.ts";
 
 interface Module {
   name: string;

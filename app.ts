@@ -1,11 +1,11 @@
-import { Status } from "https://deno.land/std@0.198.0/http/http_status.ts";
+import { Status } from "https://deno.land/std@0.199.0/http/http_status.ts";
 import {
   cors,
   logger,
   prettyJSON,
   serveStatic,
-} from "https://deno.land/x/hono@v3.4.3/middleware.ts";
-import { Hono } from "https://deno.land/x/hono@v3.4.3/mod.ts";
+} from "https://deno.land/x/hono@v3.5.0/middleware.ts";
+import { Hono } from "https://deno.land/x/hono@v3.5.0/mod.ts";
 
 import { routes } from "./routes.ts";
 import { consoleDateLog, writeDateLog } from "./utils/log.ts";
