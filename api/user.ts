@@ -1,8 +1,8 @@
-import { Hono } from "https://deno.land/x/hono@v3.4.3/mod.ts";
+import type { App } from "../app.ts";
 import { useSuccessResponse } from "../utils/response.ts";
 
 // TODO
-export default function (app: Hono) {
+export default function (app: App) {
   app.get("/api/users", (c) => useSuccessResponse(c, "获取所有用户"));
   app.get("/api/user/:id", (c) => useSuccessResponse(c, "获取特定用户信息"));
   app.put("/api/user/:id", (c) => useSuccessResponse(c, "更新特定用户信息"));

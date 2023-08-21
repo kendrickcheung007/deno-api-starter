@@ -12,7 +12,15 @@ import { consoleDateLog, writeDateLog } from "./utils/log.ts";
 import { useFailResponse } from "./utils/response.ts";
 import { inDenoDeploy } from "./utils/runtime.ts";
 
-const app = new Hono();
+type AppContext = {
+  Bindings: {
+    ip: string;
+  };
+};
+
+export const app = new Hono<AppContext>();
+
+export type App = typeof app;
 
 // 404 处理
 app.notFound((c) => {
@@ -55,8 +63,22 @@ app.use("*", prettyJSON());
 // 静态服务
 app.use("/static/*", serveStatic({ root: "./" }));
 
-routes.forEach((route: (app: Hono) => void) => {
+routes.forEach((route) => {
   route(app);
 });
 
-Deno.serve(app.fetch);
+function getIp(da: Deno.Addr) {
+  if (["tcp", "udp"].includes(da.transport)) {
+    const a = da as Deno.NetAddr;
+    return `${a.hostname}:${a.port}`;
+  } else {
+    const a = da as Deno.UnixAddr;
+    return a.path;
+  }
+}
+
+Deno.serve((request, ci) => {
+  return app.fetch(request, {
+    ip: getIp(ci.remoteAddr),
+  });
+});
