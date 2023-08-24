@@ -7,9 +7,31 @@ interface Module {
   path: string;
 }
 
-export async function createRoutes(dir = "./api", output = "./routes.ts") {
-  let counter = 0;
-  const imports: string[] = [];
+function useCount(count = 0) {
+  return function (newCount?: number) {
+    if (newCount !== undefined) {
+      count = newCount;
+      return count;
+    }
+    return count++;
+  };
+}
+
+function formatRoutes(routes: string[]) {
+  const count = useCount();
+  const { length } = routes;
+  return `export const routes = ${JSON.stringify(routes, replacer, 2)};`
+    .replace(/(['"])(\$.*?)\1/g, "$2");
+  function replacer(_: string, v: unknown) {
+    if (count() === length) {
+      return v + ",";
+    }
+    return v;
+  }
+}
+
+async function readFileModules(dir: string) {
+  const count = useCount();
   const modules: Module[] = [];
   for await (
     const entry of walk(dir, {
@@ -19,17 +41,26 @@ export async function createRoutes(dir = "./api", output = "./routes.ts") {
     })
   ) {
     const module: Module = {
-      name: `$${counter++}`,
+      name: `$${count()}`,
       path: slash(entry.path),
     };
     modules.push(module);
+  }
+  return modules;
+}
+
+export async function createRoutes(dir = "./api", output = "./routes.ts") {
+  const modules = await readFileModules(dir);
+  const routes: string[] = [];
+  const imports: string[] = [];
+
+  for (const module of modules) {
+    routes.push(module.name);
     imports.push(`import ${module.name} from "./${module.path}";`);
   }
-  const importsText = imports.join("\n");
+  const routesText = formatRoutes(routes);
 
-  const routes = modules.map((m) => m.name);
-  const routesText = `export const routes = ${JSON.stringify(routes, null, 2)};`
-    .replace(/(['"])(\$.*?)\1/g, "$2");
+  const importsText = imports.join("\n");
 
   const text = `${importsText}\n\n${routesText}`;
 
