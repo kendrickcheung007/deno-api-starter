@@ -1,7 +1,7 @@
-import { walk } from "https://deno.land/std@0.199.0/fs/walk.ts";
-import { slash } from "https://deno.land/x/easy_std@v0.5.0/src/path.ts";
-import { useCount } from "https://deno.land/x/easy_std@v0.5.0/src/fn.ts";
 import { debounce } from "https://deno.land/std@0.199.0/async/debounce.ts";
+import { walk } from "https://deno.land/std@0.199.0/fs/walk.ts";
+import { useCount } from "https://deno.land/x/easy_std@v0.5.0/src/fn.ts";
+import { slash } from "https://deno.land/x/easy_std@v0.5.0/src/path.ts";
 import { denoFmt } from "https://deno.land/x/easy_std@v0.5.0/src/process.ts";
 
 interface Module {

@@ -1,6 +1,6 @@
-import { join } from "https://deno.land/std@0.199.0/path/mod.ts";
-import { ensureFile } from "https://deno.land/std@0.199.0/fs/ensure_file.ts";
 import { format } from "https://deno.land/std@0.199.0/datetime/format.ts";
+import { ensureFile } from "https://deno.land/std@0.199.0/fs/ensure_file.ts";
+import { join } from "https://deno.land/std@0.199.0/path/mod.ts";
 
 const COLOR_STATUS_REG = /.\[3\wm(\w{3}).\[0m/;
 
