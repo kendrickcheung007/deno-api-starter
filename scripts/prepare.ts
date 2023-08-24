@@ -1,33 +1,17 @@
 import { walk } from "https://deno.land/std@0.199.0/fs/walk.ts";
-import { slash } from "https://deno.land/x/easy_std@v0.4.8/src/path.ts";
+import { slash } from "https://deno.land/x/easy_std@v0.5.0/src/path.ts";
+import { useCount } from "https://deno.land/x/easy_std@v0.5.0/src/fn.ts";
 import { debounce } from "https://deno.land/std@0.199.0/async/debounce.ts";
+import { denoFmt } from "https://deno.land/x/easy_std@v0.5.0/src/process.ts";
 
 interface Module {
   name: string;
   path: string;
 }
 
-function useCount(count = 0) {
-  return function (newCount?: number) {
-    if (newCount !== undefined) {
-      count = newCount;
-      return count;
-    }
-    return count++;
-  };
-}
-
 function formatRoutes(routes: string[]) {
-  const count = useCount();
-  const { length } = routes;
-  return `export const routes = ${JSON.stringify(routes, replacer, 2)};`
+  return `export const routes = ${JSON.stringify(routes, null, 2)};`
     .replace(/(['"])(\$.*?)\1/g, "$2");
-  function replacer(_: string, v: unknown) {
-    if (count() === length) {
-      return v + ",";
-    }
-    return v;
-  }
 }
 
 async function readFileModules(dir: string) {
@@ -64,7 +48,9 @@ export async function createRoutes(dir = "./api", output = "./routes.ts") {
 
   const text = `${importsText}\n\n${routesText}`;
 
-  Deno.writeTextFile(output, text);
+  await Deno.writeTextFile(output, text);
+
+  await denoFmt([output]);
 }
 
 const debouncedCreateRoutes = debounce(createRoutes, 500);
