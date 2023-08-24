@@ -4,8 +4,8 @@ import {
   logger,
   prettyJSON,
   serveStatic,
-} from "https://deno.land/x/hono@v3.5.0/middleware.ts";
-import { Hono } from "https://deno.land/x/hono@v3.5.0/mod.ts";
+} from "https://deno.land/x/hono@v3.5.4/middleware.ts";
+import { Hono } from "https://deno.land/x/hono@v3.5.4/mod.ts";
 
 import { routes } from "./routes.ts";
 import { consoleDateLog, writeDateLog } from "./utils/log.ts";
