@@ -1,11 +1,11 @@
 import {
   Status,
   STATUS_TEXT,
-} from "https://deno.land/std@0.201.0/http/http_status.ts";
+} from "https://deno.land/std@0.202.0/http/http_status.ts";
 import {
   type Context,
   HTTPException,
-} from "https://deno.land/x/hono@v3.6.0-rc.1/mod.ts";
+} from "https://deno.land/x/hono@v3.7.2/mod.ts";
 
 // 规范成功请求
 export function useFailResponse(
